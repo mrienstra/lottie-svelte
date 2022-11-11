@@ -38,7 +38,14 @@
 	 */
 	export let direction: Direction = Direction.FORWARD;
 
-	const uuid = crypto.randomUUID();
+
+
+	const getUuid = async () => (
+		typeof crypto === "undefined" ? (await import("crypto")) : crypto
+	).randomUUID();
+
+	const uuid = getUuid();
+
 	const dispatch = createEventDispatcher<{ animation: AnimationItem }>();
 
 	onMount(() => {
